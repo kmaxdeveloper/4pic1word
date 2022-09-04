@@ -11,6 +11,10 @@ import android.view.animation.AnimationUtils
 import uz.kmax.a4pic1word.databinding.NextLevelDialogBinding
 import uz.kmax.a4pic1word.gamelevel.GameLevel
 
+/**
+ *  Bu kod har o'yin bosqichi yangilanayotganda paydo bo'ladi
+ * */
+
 class NextLevelDialog {
     private var nextClickListener: (() -> Unit)? = null
     fun setNextListener(f: () -> Unit) {

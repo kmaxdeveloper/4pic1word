@@ -8,6 +8,10 @@ import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import uz.kmax.a4pic1word.databinding.HelpDialogBinding
 
+/**
+ *  Bu kod o'yindagi yordam oynasidir
+ * */
+
 class HelpDialog {
     private var okClickListener : ((index:Int)-> Unit)? = null
     fun setOkListener(f: (index : Int)-> Unit){ okClickListener = f }
@@ -20,18 +24,21 @@ class HelpDialog {
         dialog.setCancelable(false)
 
         bindingDialog.word1.setOnClickListener {
-            okClickListener?.invoke(2)
             dialog.dismiss()
+            //Thread.sleep(2000)
+            okClickListener?.invoke(2)
         }
 
         bindingDialog.letter1.setOnClickListener {
-            okClickListener?.invoke(0)
             dialog.dismiss()
+            //Thread.sleep(2000)
+            okClickListener?.invoke(0)
         }
 
         bindingDialog.letter1Ads.setOnClickListener {
-            okClickListener?.invoke(1)
             dialog.dismiss()
+            //Thread.sleep(2000)
+            okClickListener?.invoke(1)
         }
 
         bindingDialog.dismiss.setOnClickListener {
@@ -39,8 +46,9 @@ class HelpDialog {
         }
 
         bindingDialog.word1Ads.setOnClickListener {
-            okClickListener?.invoke(3)
             dialog.dismiss()
+           // Thread.sleep(2000)
+            okClickListener?.invoke(3)
         }
 
         dialog.show()

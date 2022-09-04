@@ -8,6 +8,10 @@ import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import uz.kmax.a4pic1word.databinding.WinDialogBinding
 
+/**
+ *  Bu Kod O'yinning tugaganligini bildiradi
+ * */
+
 class LastDialog() {
     private var okClickListener : (()-> Unit)? = null
     fun setOkListener(f: ()-> Unit){ okClickListener = f }

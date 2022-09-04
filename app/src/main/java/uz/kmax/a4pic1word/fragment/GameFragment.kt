@@ -3,6 +3,7 @@ package uz.kmax.a4pic1word.fragment
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import uz.kmax.a4pic1word.databinding.LayoutGameBinding
 import uz.kmax.a4pic1word.gamelevel.GameLevel
@@ -27,9 +28,12 @@ class GameFragment : BaseFragment<LayoutGameBinding>(LayoutGameBinding::inflate)
     private val lastDialog = LastDialog()
     private val nextLevelDialog = NextLevelDialog()
     private val helpDialog = HelpDialog()
+    private var check = true
+    var clean = false
 
     override fun onViewCreated() {
-        lastCoinCount = shared.getLastCoinCount()
+        //lastCoinCount = shared.getLastCoinCount()
+        lastCoinCount = 5000
         lastLevelCount = shared.getLastLevelCount()
         binding.btnBack.setOnClickListener { replaceFragment(MenuFragment()) }
         binding.level.text = "Level  ${lastLevelCount+1}"
@@ -38,11 +42,28 @@ class GameFragment : BaseFragment<LayoutGameBinding>(LayoutGameBinding::inflate)
         gameManager = GameManager(questionsList, lastLevelCount)
         loadViews()
         loadDataToView()
+
         binding.btnClean.setOnClickListener {
-            for (i in 0 until wordList.size) { wordList[i].text = "" }
-            for (i in 0 until lettersList.size) { lettersList[i].visible() }
-            wordCheck = ""
+            if (clean){
+                Toast.makeText(requireContext(), "$clean", Toast.LENGTH_SHORT).show()
+                for (i in 0 until wordList.size){
+                    if (wordList[i].isClickable){
+                        wordList[i].text = ""
+                    }
+                }
+                for (i in 0 until lettersList.size){
+                    if (lettersList[i].isClickable && lettersList[i].isInvisible){
+                        lettersList[i].visible()
+                    }
+                }
+            }else{
+                Toast.makeText(requireContext(), "$clean", Toast.LENGTH_SHORT).show()
+                for (i in 0 until wordList.size) { wordList[i].text = "" }
+                for (i in 0 until lettersList.size) { lettersList[i].visible() }
+                wordCheck = ""
+            }
         }
+
         binding.btnHelp.setOnClickListener {
             helpDialog.show(requireContext())
             helpDialog.setOkListener {
@@ -65,26 +86,36 @@ class GameFragment : BaseFragment<LayoutGameBinding>(LayoutGameBinding::inflate)
     }
 
     private fun help(currentCoin:Int){
-        if (lastCoinCount >= currentCoin) {
+        if (lastCoinCount >= currentCoin && currentCoin == 10) {
             var n = 0
             for (i in 0 until wordList.size) {
                 n = i
                 if (wordList[i].text.isEmpty()) {
                     wordList[n].text = gameManager.getWord()[n].toString()
+                    clean = true
+                    wordList[n].isClickable = false
                     break
                 }
             }
             for (i in 0 until lettersList.size) {
                 if (lettersList[i].text.toString() == wordList[n].text.toString()) {
                     lettersList[i].invisible()
+                    lettersList[i].isClickable = false
                     break
                 }
             }
-            lastCoinCount -= 5
+            lastCoinCount -= 10
             binding.coins.text = lastCoinCount.toString()
             gameCheck()
-        } else {
-            Toast.makeText(requireContext(), "Tangalaringiz miqdori yetmaydi !!!", Toast.LENGTH_SHORT).show()
+        } else if (lastCoinCount >= currentCoin && currentCoin == 25){
+            wordCheck = gameManager.getWord()
+            check = false
+            Thread.sleep(2000)
+            lastCoinCount -= 25
+            binding.coins.text = lastCoinCount.toString()
+            gameCheck()
+        } else{
+            Toast.makeText(requireContext(), "Tangalar soni kam !!!", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -130,7 +161,14 @@ class GameFragment : BaseFragment<LayoutGameBinding>(LayoutGameBinding::inflate)
     }
 
     private fun letterBtnClick(button: AppCompatButton) {
-        if (button.isVisible && wordList[gameManager.getWordSize() - 1].text.isEmpty()) {
+        var sum = 0
+        for (i in 0 until gameManager.getWordSize()){
+            if (wordList[i].text.isNotEmpty()){
+                sum+=1
+            }
+        }
+
+        if (sum != gameManager.getWordSize() || button.isVisible && wordList[gameManager.getWordSize() - 1].text.isEmpty()) {
             button.invisible()
             val word = button.text.toString()
             for (i in 0 until wordList.size) {
@@ -207,17 +245,23 @@ class GameFragment : BaseFragment<LayoutGameBinding>(LayoutGameBinding::inflate)
                     loadViews()
                 }
             }else{
-                lastDialog.show(requireContext())
-                lastDialog.setOkListener { replaceFragment(MenuFragment()) }
+                nextLevelDialog.show(requireContext(),lastLevelCount)
+                nextLevelDialog.setNextListener {
+                    lastDialog.show(requireContext())
+                    lastDialog.setOkListener { replaceFragment(MenuFragment()) }
+                }
             }
         }
     }
 
     private fun checkWord(): Boolean {
-        wordCheck = ""
-        for (i in 0 until gameManager.getWordSize()) {
-            wordCheck += wordList[i].text.trim()
+        if (check){
+            wordCheck = ""
+            for (i in 0 until gameManager.getWordSize()) {
+                wordCheck += wordList[i].text.trim()
+            }
         }
+        check = true
         return gameManager.check(wordCheck)
     }
 }
