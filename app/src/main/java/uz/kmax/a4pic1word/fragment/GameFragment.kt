@@ -32,8 +32,7 @@ class GameFragment : BaseFragment<LayoutGameBinding>(LayoutGameBinding::inflate)
     var clean = false
 
     override fun onViewCreated() {
-        //lastCoinCount = shared.getLastCoinCount()
-        lastCoinCount = 5000
+        lastCoinCount = shared.getLastCoinCount()
         lastLevelCount = shared.getLastLevelCount()
         binding.btnBack.setOnClickListener { replaceFragment(MenuFragment()) }
         binding.level.text = "Level  ${lastLevelCount+1}"
