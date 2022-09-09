@@ -70,7 +70,6 @@ class GameFragment : BaseFragment<LayoutGameBinding>(LayoutGameBinding::inflate)
 
         binding.btnClean.setOnClickListener {
             if (clean) {
-                Toast.makeText(requireContext(), "$clean", Toast.LENGTH_SHORT).show()
                 for (i in 0 until wordList.size) {
                     if (wordList[i].isClickable) {
                         wordList[i].text = ""
@@ -82,7 +81,6 @@ class GameFragment : BaseFragment<LayoutGameBinding>(LayoutGameBinding::inflate)
                     }
                 }
             } else {
-                Toast.makeText(requireContext(), "$clean", Toast.LENGTH_SHORT).show()
                 for (i in 0 until wordList.size) {
                     wordList[i].text = ""
                 }
