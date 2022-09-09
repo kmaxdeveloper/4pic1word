@@ -63,8 +63,6 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/wordLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/actionBar">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -96,7 +94,7 @@
             android:layout_below="@id/img2"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:layout_toEndOf="@id/img3"
             android:padding="5dp"
@@ -142,19 +140,17 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn6"
             style="@style/wordBtn"
-            android:layout_below="@id/btn3"/>
-
+            android:layout_toEndOf="@id/btn5" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn7"
             style="@style/wordBtn"
-            android:layout_below="@id/btn3"
-            android:layout_toEndOf="@id/btn6" />
+            android:layout_below="@id/btn1" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn8"
             style="@style/wordBtn"
-            android:layout_below="@id/btn3"
+            android:layout_below="@id/btn2"
             android:layout_toEndOf="@id/btn7" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -166,8 +162,20 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn10"
             style="@style/wordBtn"
-            android:layout_below="@id/btn3"
+            android:layout_below="@id/btn2"
             android:layout_toEndOf="@id/btn9" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn11"
+            style="@style/wordBtn"
+            android:layout_below="@id/btn2"
+            android:layout_toEndOf="@id/btn10" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn12"
+            style="@style/wordBtn"
+            android:layout_below="@id/btn2"
+            android:layout_toEndOf="@id/btn11" />
     </RelativeLayout>
 
     <androidx.appcompat.widget.LinearLayoutCompat

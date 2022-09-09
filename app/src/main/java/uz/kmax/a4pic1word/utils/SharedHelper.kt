@@ -92,4 +92,55 @@ class SharedHelper(var context: Context) {
         resources.updateConfiguration(configuration, resources.displayMetrics)
         return context
     }
+
+    fun setAllLetters(numbers: ArrayList<String>) {
+        editor = preferences.edit()
+
+        numbers.forEachIndexed { index, letter ->
+            editor.putString("WORD_${index}", letter)
+        }
+        editor.apply()
+    }
+
+    fun getAllLetters(wordSize : Int): ArrayList<String> {
+        val numbers = ArrayList<String>()
+        for (i in 0 until wordSize) {
+            if (i == wordSize) {
+                numbers.add(preferences.getString("WORD_${i}", "").toString())
+            } else {
+                numbers.add(preferences.getString("WORD_${i}", "").toString())
+            }
+        }
+        return numbers
+    }
+
+    fun setResume(resume : Boolean) {
+        editor = preferences.edit()
+
+        editor.putBoolean("RESUME_GAME",resume)
+        editor.apply()
+    }
+
+    fun getResume() = preferences.getBoolean("RESUME_GAME",false)
+
+    fun setLetterVisibility(visibility: ArrayList<Int>){
+        editor = preferences.edit()
+
+        for (i in 0 until visibility.size){
+            editor.putInt("LETTER_${i}",visibility[i])
+        }
+        editor.apply()
+    }
+
+    fun getLetterVisibility():ArrayList<Int>{
+        val visibility = ArrayList<Int>()
+        for (i in 0 until 12) {
+            if (i == 11) {
+                visibility.add(preferences.getInt("LETTER_${i}",1).toInt())
+            } else {
+                visibility.add(preferences.getInt("LETTER_${i}", 1).toInt())
+            }
+        }
+        return visibility
+    }
 }

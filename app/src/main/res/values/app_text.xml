@@ -2,4 +2,5 @@
 <resources>
     <string name="night_mode">Night Mode</string>
     <string name="music_mode">Music Mode</string>
+    <string name="level">Level 1</string>
 </resources>
