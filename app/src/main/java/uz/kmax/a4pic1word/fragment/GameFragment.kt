@@ -156,7 +156,7 @@ class GameFragment : BaseFragment<LayoutGameBinding>(LayoutGameBinding::inflate)
             binding.coins.text = lastCoinCount.toString()
             gameCheck()
         } else {
-            Toast.makeText(requireContext(), "Tangalar soni kam !!!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "coin amount is low", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -174,7 +174,7 @@ class GameFragment : BaseFragment<LayoutGameBinding>(LayoutGameBinding::inflate)
         for (i in 0 until lettersList.size) {
             if (lettersList[i].isInvisible) {
                 letterVisibility.add(-1)
-            }else{
+            } else {
                 letterVisibility.add(1)
             }
         }
@@ -200,6 +200,7 @@ class GameFragment : BaseFragment<LayoutGameBinding>(LayoutGameBinding::inflate)
             )
         }
     }
+
     private fun loadViews() {
         imagesList = ArrayList()
         wordList = ArrayList()
@@ -315,10 +316,10 @@ class GameFragment : BaseFragment<LayoutGameBinding>(LayoutGameBinding::inflate)
         }
 
         for (i in 0 until lettersList.size) {
-            if (letterListArray[i] == -1){
+            if (letterListArray[i] == -1) {
                 lettersList[i].invisible()
                 lettersList[i].text = gameManager.getLetters()[i].toString()
-            }else{
+            } else {
                 lettersList[i].visible()
                 lettersList[i].text = gameManager.getLetters()[i].toString()
             }
@@ -338,7 +339,7 @@ class GameFragment : BaseFragment<LayoutGameBinding>(LayoutGameBinding::inflate)
                         lastCoinCount += 10
                         binding.coins.text = lastCoinCount.toString()
                         gameManager.level += 1
-                        lastLevelCount+=1
+                        lastLevelCount += 1
                         binding.level.text = lastLevelCount.toString()
                         loadDataToView()
                         loadViews()
@@ -409,30 +410,28 @@ class GameFragment : BaseFragment<LayoutGameBinding>(LayoutGameBinding::inflate)
 
             override fun onAdShowedFullScreenContent() {
                 // Called when ad is shown.
-                //Log.d(TAG, "Ad showed fullscreen content.")
             }
         }
     }
 
     override fun onResume() {
         super.onResume()
+        // ca-app-pub-3940256099942544/1033173712 simple code
+        // ca-app-pub-4664801446868642/2018213547 my code
         val adRequest = AdRequest.Builder().build()
         InterstitialAd.load(
             requireContext(),
-            "ca-app-pub-3940256099942544/1033173712",
+            "ca-app-pub-4664801446868642/2018213547",
             adRequest,
             object : InterstitialAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
-                    Toast.makeText(requireContext(), "$adError", Toast.LENGTH_SHORT).show()
                     mInterstitialAd = null
                 }
 
                 override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                    Toast.makeText(requireContext(), "Ad loaded !", Toast.LENGTH_SHORT).show()
                     mInterstitialAd = interstitialAd
                     ad()
                 }
             })
-        //activity?.window?.statusBarColor = Color.BLUE
     }
 }
