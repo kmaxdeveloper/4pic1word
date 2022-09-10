@@ -38,7 +38,7 @@ class SharedHelper(var context: Context) {
         editor.apply()
     }
 
-    fun getLastCoinCount() = preferences.getInt("LAST_COIN_COUNT",0)
+    fun getLastCoinCount() = preferences.getInt("LAST_COIN_COUNT",10)
 
     fun setLevelCount(levelCount: Int){
         editor = preferences.edit()

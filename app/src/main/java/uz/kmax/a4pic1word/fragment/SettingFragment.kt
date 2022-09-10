@@ -9,7 +9,7 @@ class SettingFragment: BaseFragment<LayoutSettingBinding>(LayoutSettingBinding::
     val shared by lazy { SharedHelper(requireContext()) }
     override fun onViewCreated() {
         binding.backBtn.setOnClickListener {
-            replaceFragment(MenuFragment())
+            backFragment()
         }
 
         binding.musicMode.isChecked = shared.getMusicMode()

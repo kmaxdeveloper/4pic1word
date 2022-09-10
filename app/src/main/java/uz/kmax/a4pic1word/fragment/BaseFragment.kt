@@ -36,4 +36,12 @@ abstract class BaseFragment<VB : ViewBinding>(
     fun replaceFragment(setFragment: Fragment) {
         controller?.replaceFragment(setFragment)
     }
+
+    fun startMainFragment(setFragment: Fragment){
+        controller?.startMainFragment(setFragment)
+    }
+
+    fun backFragment(){
+        controller?.back()
+    }
 }

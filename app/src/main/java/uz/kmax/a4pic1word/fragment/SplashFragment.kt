@@ -9,7 +9,7 @@ class SplashFragment : BaseFragment<LayoutSplashBinding>(LayoutSplashBinding::in
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
         object : CountDownTimer(5000, 100) {
             override fun onFinish() {
-                replaceFragment(MenuFragment())
+                startMainFragment(MenuFragment())
             }
             override fun onTick(value: Long) {
 

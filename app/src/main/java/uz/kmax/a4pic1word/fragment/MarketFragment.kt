@@ -14,7 +14,7 @@ class MarketFragment:BaseFragment<LayoutMarketBinding>(LayoutMarketBinding::infl
         binding.coinCount.text = coinCount.toString()
 
         binding.back.setOnClickListener {
-            replaceFragment(MenuFragment())
+            backFragment()
         }
 
         binding.miniPackage.setOnClickListener {

@@ -16,11 +16,6 @@ class MenuFragment : BaseFragment<LayoutMenuBinding>(LayoutMenuBinding::inflate)
         binding.img3.setImageResource(list.image3[lastLevel])
         binding.img4.setImageResource(list.image4[lastLevel])
 
-        binding.img1.clipToOutline = true
-        binding.img2.clipToOutline = true
-        binding.img3.clipToOutline = true
-        binding.img4.clipToOutline = true
-
         binding.level.text = "Level ${lastLevelCount.toString()}"
 
         binding.play.setOnClickListener {
@@ -30,10 +25,11 @@ class MenuFragment : BaseFragment<LayoutMenuBinding>(LayoutMenuBinding::inflate)
             replaceFragment(SettingFragment())
         }
         binding.market.setOnClickListener {
-            replaceFragment(MarketFragment())
+            Toast.makeText(requireContext(), "Coming soon !", Toast.LENGTH_SHORT).show()
+            //replaceFragment(SimpleMarket())
         }
         binding.account.setOnClickListener {
-            replaceFragment(AccountFragment())
+            Toast.makeText(requireContext(), "Coming soon !", Toast.LENGTH_SHORT).show()
         }
     }
 }

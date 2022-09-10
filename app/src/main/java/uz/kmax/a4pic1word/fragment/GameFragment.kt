@@ -64,7 +64,7 @@ class GameFragment : BaseFragment<LayoutGameBinding>(LayoutGameBinding::inflate)
                 mInterstitialAd?.show(requireActivity())
                 adType = 3
             } else {
-                replaceFragment(MenuFragment())
+                backFragment()
             }
         }
 
@@ -347,7 +347,10 @@ class GameFragment : BaseFragment<LayoutGameBinding>(LayoutGameBinding::inflate)
                 nextLevelDialog.show(requireContext(), lastLevelCount)
                 nextLevelDialog.setNextListener {
                     lastDialog.show(requireContext())
-                    lastDialog.setOkListener { replaceFragment(MenuFragment()) }
+                    shared.setResume(false)
+                    lastDialog.setOkListener {
+                        backFragment()
+                    }
                 }
             }
         }
@@ -382,7 +385,7 @@ class GameFragment : BaseFragment<LayoutGameBinding>(LayoutGameBinding::inflate)
                         gameCheck()
                     }
                     3 -> {
-                        replaceFragment(MenuFragment())
+                        backFragment()
                     }
                     4 -> {
                         wordCheck = ""
